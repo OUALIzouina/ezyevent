@@ -1,0 +1,19 @@
+# Dependencies
+**/node_modules
+
+**/.env
+**/.env.local
+**/.env.production
+**/.env.example
+# Build files
+frontend/dist
+backend/dist
+
+/backend/src/generated/prisma
+backend/prisma/migrations/dev.db
+# Logs
+npm-debug.log*
+
+
+# OS files
+.DS_Store

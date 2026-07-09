@@ -1,0 +1,9 @@
+{
+  "short_name": "EzyEvents",
+  "name": "EzyEvents",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#6C4EE3",
+  "background_color": "#ffffff"
+}
