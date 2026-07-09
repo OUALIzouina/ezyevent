@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { Role } from '../services/auth.service';
 
 export interface AuthPayload {
@@ -16,13 +16,15 @@ declare global {
 }
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
+const JWT_EXPIRES_IN = (process.env.JWT_EXPIRES_IN || '7d') as SignOptions['expiresIn'];
+
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET is not set in environment variables');
 }
 
 export function signToken(payload: AuthPayload): string {
   return jwt.sign(payload, JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+    expiresIn: JWT_EXPIRES_IN || '7d',
   });
 }
 
