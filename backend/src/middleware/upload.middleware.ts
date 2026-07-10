@@ -1,6 +1,8 @@
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import cloudinary from '../config/cloudinary';
 
 // NOTE on deployment: this stores files on local disk, which works fine in
 // development. On Render's free/starter tiers, the filesystem is EPHEMERAL —
@@ -14,12 +16,12 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename: (_req, file, cb) => {
-    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
-    cb(null, uniqueName);
-  },
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: 'ezyevents',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+  } as any, // TS types for this package are a bit loose, cast is common here
 });
 
 function fileFilter(_req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) {

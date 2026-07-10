@@ -2,9 +2,15 @@ const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5002/api";
 const SERVER_ORIGIN = API_URL.replace(/\/api\/?$/, ''); // strip trailing /api to get the bare server origin
 // imagePath is stored as "/uploads/filename.jpg" — this builds the full URL for <img src="">
 export function getUploadUrl(imagePath) {
-  if (!imagePath) return '';
-  return `${SERVER_ORIGIN}${imagePath}`;
+  if (!imagePath) return "";
 
+  // Already a full URL (Cloudinary)
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+
+  // Legacy local uploads
+  return `${SERVER_ORIGIN}${imagePath}`;
 }
 
 export async function apiFetch(path, options = {}) {

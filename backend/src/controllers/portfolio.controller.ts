@@ -28,7 +28,8 @@ export async function uploadImage(req: Request, res: Response) {
   }
 
   // Publicly reachable path — app.ts serves /uploads as static
-  const imagePath = `/uploads/${req.file.filename}`;
+  const imagePath = (req.file as any).path;
+  console.log(req.file);
 
   try {
     const image = await portfolioService.addPortfolioImage(portfolioId, req.auth!.userId, imagePath);
