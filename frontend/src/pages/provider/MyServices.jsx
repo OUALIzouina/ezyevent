@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useCallback } from 'react';
 import { providers as providersApi, services as servicesApi } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import Btn from '../../components/Btn';
@@ -76,7 +76,7 @@ function MyServices() {
   const [editingService, setEditingService] = useState(null);
   const [actionError, setActionError] = useState('');
 
-  async function load() {
+  const load = useCallback(async () => {
     try {
       const data = await providersApi.getProfile(user.id);
       setProfile(data);
@@ -85,10 +85,11 @@ function MyServices() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [user.id]);
 
-  useEffect(() => { load(); }, [user.id]);
-
+  useEffect(() => {
+    load();
+  }, [load]);
   async function handleDelete(serviceId) {
     setActionError('');
     try {

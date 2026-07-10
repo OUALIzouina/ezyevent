@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef ,useCallback} from 'react';
 import { providers as providersApi, portfolios as portfoliosApi, getUploadUrl } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 import Btn from '../../components/Btn';
@@ -132,7 +132,7 @@ function Portfolio() {
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
 
-  async function load() {
+  const load = useCallback(async () => {
     try {
       const data = await providersApi.getProfile(user.id);
       setProfile(data);
@@ -141,10 +141,11 @@ function Portfolio() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [user.id]);
 
-  useEffect(() => { load(); }, [user.id]);
-
+  useEffect(() => {
+    load();
+  }, [load]);
   if (loading) return <p className="text-gray-500">Loading...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
 

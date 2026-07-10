@@ -49,15 +49,15 @@ function Footer() {
 
 
                     <div className="flex mt-9  ">
-                        <a href="#" className=" hover:bg-secondary hover:text-white text-secondary p-3 rounded-full transition duration-300">
+                        <a href="https://facebook.com" className=" hover:bg-secondary hover:text-white text-secondary p-3 rounded-full transition duration-300">
                             <i className="fab fa-instagram"></i>
-                        </a> <a href="#" className=" hover:bg-secondary hover:text-white text-secondary  p-3 rounded-full transition duration-300">
+                        </a> <a href="https://facebook.com" className=" hover:bg-secondary hover:text-white text-secondary  p-3 rounded-full transition duration-300">
                             <i className="fab fa-facebook"></i>
                         </a>
-                        <a href="#" className=" hover:bg-secondary hover:text-white text-secondary  p-3 rounded-full transition duration-300">
+                        <a href="https://facebook.com" className=" hover:bg-secondary hover:text-white text-secondary  p-3 rounded-full transition duration-300">
                             <i className="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" className=" hover:bg-secondary hover:text-white p-3 text-secondary  rounded-full transition duration-300">
+                        <a href="https://facebook.com" className=" hover:bg-secondary hover:text-white p-3 text-secondary  rounded-full transition duration-300">
                             <i className="fab fa-tiktok "></i>
                         </a>
                        
