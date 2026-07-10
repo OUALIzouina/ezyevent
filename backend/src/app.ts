@@ -11,12 +11,25 @@ const app = express();
 // is required for cookies to be sent cross-domain. '*' + credentials is
 // rejected by browsers outright — this combination is the most common cause
 // of the CORS errors you've been hitting.
+const allowedOrigins = [
+  "http://localhost:3001",
+  "https://ezyevent-oualizouinas-projects.vercel.app",
+  
+];
+
 app.use(
   cors({
-    origin: "http://localhost:3001", // e.g. https://your-app.vercel.app
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-  }),
+  })
 );
+
 
 app.use(express.json());
 app.use(cookieParser());
